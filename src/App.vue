@@ -234,18 +234,18 @@ export default {
                 });
 
                 navigator.mediaSession.setActionHandler("play", function() {
-                    this.$refs.Player.play();
+                    this.$refs.player.play();
                 });
                 navigator.mediaSession.setActionHandler("pause", function() {
-                    this.$refs.Player.pause();
+                    this.$refs.player.pause();
                 });
                 navigator.mediaSession.setActionHandler("seekbackward", function() {});
                 navigator.mediaSession.setActionHandler("seekforward", function() {});
                 navigator.mediaSession.setActionHandler("previoustrack", function() {
-                    this.$refs.Player.change_song(false);
+                    this.$refs.player.change_song(false);
                 });
                 navigator.mediaSession.setActionHandler("nexttrack", function() {
-                    this.$refs.Player.change_song(true);
+                    this.$refs.player.change_song(true);
                 });
             }
         });
