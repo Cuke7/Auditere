@@ -70,7 +70,7 @@ export default {
 
     data: () => ({
         search_loading: null,
-        search_query: "Centuries",
+        search_query: "",
         search_results: [],
         liste_lecture: [],
     }),
