@@ -17,6 +17,8 @@ module.exports = {
                     purpose: "any maskable",
                 },
             ],
+            themeColor: "#000080",
+            msTileColor: "#000080",
         },
         iconPaths: {
             favicon32: null,
