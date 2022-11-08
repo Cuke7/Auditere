@@ -1,10 +1,13 @@
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
     modules: ['@nuxtjs/tailwindcss', '@kevinmarrec/nuxt-pwa'],
+    build: {
+        transpile: ['@heroicons/vue']
+    },
     pwa: {
-        workbox: {
-            enabled: true
-        },
+        // workbox: {
+        //     enabled: true
+        // },
         manifest: {
             name: 'Auditere',
             short_name: 'Auditere',
