@@ -23,7 +23,7 @@ import Loader from "../components/Loader.vue";
 import { PlayIcon, PlusIcon, TrashIcon } from "@heroicons/vue/24/solid";
 
 const playlistModalElement = ref<HTMLInputElement | null>(null);
-const playlistUrl = ref("https://www.youtube.com/playlist?list=PLY80CRqvcxEUByZ_P9DzXmsL5HLgx5rw4");
+const playlistUrl = ref("");
 // const playlistUrl = ref("https://www.youtube.com/playlist?list=PLY80CRqvcxEXtmbMSJDqIK4uk_FB3j5I8");
 
 const playlistClicked = async (playlist: Playlist) => {
