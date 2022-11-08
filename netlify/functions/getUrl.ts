@@ -7,11 +7,23 @@ const handler: Handler = async (event, context) => {
     let format = ytdl.chooseFormat(info.formats, { quality: "highestaudio" });
     if (format == null) {
         return {
+            headers: {
+                /* Required for CORS support to work */
+                'Access-Control-Allow-Origin': '*',
+                /* Required for cookies, authorization headers with HTTPS */
+                'Access-Control-Allow-Credentials': true
+            },
             statusCode: 201,
             body: JSON.stringify({ url: null }),
         };
     }
     return {
+        headers: {
+            /* Required for CORS support to work */
+            'Access-Control-Allow-Origin': '*',
+            /* Required for cookies, authorization headers with HTTPS */
+            'Access-Control-Allow-Credentials': true
+        },
         statusCode: 200,
         body: JSON.stringify({ url: format.url }),
     };

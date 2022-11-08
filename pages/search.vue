@@ -2,8 +2,9 @@
     <div class="flex flex-1">
         <div class="flex flex-col m-8 w-full">
             <input @keyup.enter="getSearch" ref="input" v-model="search" placeholder="Search on youtube" type="text" class="font-mono bg-red-800 rounded-full p-3 text-white placeholder:text-white" />
+            <!-- <button v-if="!player.playlistIsLoading" @click="loadPlaylist()" class="ml-4"><PlusIcon class="h-10 w-10 bg-white btn-circle p-2 text-slate-900" /></button> -->
 
-            <Loader class="mt-4" v-if="store.searchIsLoading" />
+            <Loader class="mt-4" v-if="player.searchIsLoading" />
         </div>
 
         <div @click="songClicked(song, index)" v-for="(song, index) in searchResults" :key="index" class="flex my-4">
@@ -16,7 +17,7 @@
 import { ref, watch } from "vue";
 import axios from "axios";
 import { Song } from "../types";
-import { store } from "../store";
+import { player } from "../store";
 import Loader from "../components/Loader.vue";
 import SongComponent from "../components/SongComponent.vue";
 
@@ -33,20 +34,20 @@ const suggestions = ref([]);
 const searchResults = ref([] as Song[]);
 
 const getSearch = async () => {
-    store.searchIsLoading = true;
+    player.searchIsLoading = true;
     suggestions.value = [];
     let { data } = await axios.get("/.netlify/functions/getSearch?search=" + search.value);
     searchResults.value = data;
-    store.searchIsLoading = false;
+    player.searchIsLoading = false;
 };
 
 const songClicked = (song: Song, index: number) => {
     open.value = false;
-    store.songIndex = index;
+    player.songIndex = index;
     if (searchModalElement.value) searchModalElement.value.checked = false;
-    store.loadSong(song);
-    store.currentPlaylist = { name: search.value, playlist: [song], url: "" };
-    store.songIndex = 0;
+    player.loadSong(song);
+    player.currentPlaylist = { name: search.value, playlist: [song], url: "" };
+    player.songIndex = 0;
     search.value = "";
 };
 </script>

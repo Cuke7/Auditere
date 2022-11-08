@@ -8,6 +8,12 @@ const handler: Handler = async (event, context) => {
         rp = await axios.get(playlistUrl);
     } catch {
         return {
+            headers: {
+                /* Required for CORS support to work */
+                'Access-Control-Allow-Origin': '*',
+                /* Required for cookies, authorization headers with HTTPS */
+                'Access-Control-Allow-Credentials': true
+            },
             statusCode: 201,
             body: 'Incorrect URL'
         };
@@ -24,6 +30,12 @@ const handler: Handler = async (event, context) => {
         console.error(error);
         return {
             statusCode: 201,
+            headers: {
+                /* Required for CORS support to work */
+                'Access-Control-Allow-Origin': '*',
+                /* Required for cookies, authorization headers with HTTPS */
+                'Access-Control-Allow-Credentials': true
+            },
             body: 'Incorrect playlist URL'
         };
     }
@@ -38,6 +50,12 @@ const handler: Handler = async (event, context) => {
     }
     return {
         statusCode: 200,
+        headers: {
+            /* Required for CORS support to work */
+            'Access-Control-Allow-Origin': '*',
+            /* Required for cookies, authorization headers with HTTPS */
+            'Access-Control-Allow-Credentials': true
+        },
         body: JSON.stringify({ name: ytdata.metadata.playlistMetadataRenderer.title, playlist: playlist, url: playlistUrl }),
     };
 };
