@@ -1,54 +1,48 @@
 <template>
-    <div class="flex flex-1">
-        <div class="flex flex-col m-8 w-full">
-            <input @keyup.enter="getSearch" ref="input" v-model="search" placeholder="Search on youtube" type="text" class="font-mono bg-red-800 rounded-full p-3 text-white placeholder:text-white" />
-            <!-- <button v-if="!player.playlistIsLoading" @click="loadPlaylist()" class="ml-4"><PlusIcon class="h-10 w-10 bg-white btn-circle p-2 text-slate-900" /></button> -->
-
-            <Loader class="mt-4" v-if="player.searchIsLoading" />
+    <div class="flex flex-col flex-1 overflow-auto">
+        <div class="flex flex-col">
+            <div class="flex-col flex m-8 items-center">
+                <input @keyup.enter="getSearch" ref="input" v-model="player.search" placeholder="Search on youtube" type="text" class="w-full font-mono bg-red-800 rounded-full p-3 text-white placeholder:text-white" />
+            </div>
+            <Loader v-if="player.searchIsLoading" class="mx-auto"></Loader>
         </div>
-
-        <div @click="songClicked(song, index)" v-for="(song, index) in searchResults" :key="index" class="flex my-4">
-            <song-component :song="song" />
+        <div class="flex flex-col px-8 overflow-scroll">
+            <div @click="songClicked(song, index)" v-for="(song, index) in player.searchResults" :key="index" class="flex my-4">
+                <song-component :song="song" />
+            </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref } from "vue";
 import axios from "axios";
 import { Song } from "../types";
-import { player } from "../store";
+import { player, testServerURl } from "../store";
 import Loader from "../components/Loader.vue";
 import SongComponent from "../components/SongComponent.vue";
 
-const open = ref(false);
 const input = ref<HTMLInputElement | null>(null);
 
-watch(open, () => {
-    input.value?.focus();
-});
-
 const searchModalElement = ref<HTMLInputElement | null>(null);
-const search = ref("");
 const suggestions = ref([]);
-const searchResults = ref([] as Song[]);
 
 const getSearch = async () => {
     player.searchIsLoading = true;
     suggestions.value = [];
-    let { data } = await axios.get("/.netlify/functions/getSearch?search=" + search.value);
-    searchResults.value = data;
+    let { data } = await axios.get(testServerURl + "/.netlify/functions/getSearch?search=" + player.search);
+    player.searchResults = data;
     player.searchIsLoading = false;
 };
 
 const songClicked = (song: Song, index: number) => {
-    open.value = false;
+    const router = useRouter();
+    router.push({ path: "/" });
     player.songIndex = index;
     if (searchModalElement.value) searchModalElement.value.checked = false;
     player.loadSong(song);
-    player.currentPlaylist = { name: search.value, playlist: [song], url: "" };
+    player.currentPlaylist = { name: player.search, playlist: [song], url: "" };
     player.songIndex = 0;
-    search.value = "";
 };
 </script>
 

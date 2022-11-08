@@ -1,12 +1,12 @@
 <template>
-    <div class="flex flex-1 flex-col">
+    <div class="flex flex-1 flex-col overflow-auto">
         <div class="flex m-8 items-center">
             <input v-model="playlistUrl" @keyup.enter="loadPlaylist" placeholder="Youtube playlist url" type="text" class="font-mono bg-slate-800 rounded-full p-3 w-full" />
             <button v-if="!player.playlistIsLoading" @click="loadPlaylist()" class="ml-4"><PlusIcon class="h-10 w-10 bg-white btn-circle p-2 text-slate-900" /></button>
             <button v-else class="ml-4 btn btn-ghost loading p-0"></button>
         </div>
         <div class="mx-8">
-            <div v-for="(playlist, index) in player.savedPlaylists" :key="index" class="flex justify-between items-center rounded-lg p-4">
+            <div v-for="(playlist, index) in player.savedPlaylists" :key="index" class="flex justify-between items-center rounded-lg px-4 mb-8">
                 <div class="font-bold txt-lg">{{ playlist.name }}</div>
                 <TrashIcon class="w-6 h-6" @click="player.removePlaylist(playlist)" />
                 <PlayIcon class="w-8 h-8" @click="playlistClicked(playlist)" />

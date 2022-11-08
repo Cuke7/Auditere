@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col items-center justify-around flex-1 py-8">
         <div class="flex justify-center">
-            <img :src="player.currentSong.artwork" class="object-contain w-4/5 rounded-lg" />
+            <img :src="player.currentSong.artwork" class="object-contain w-4/5 rounded-xl" />
         </div>
         <div class="flex w-4/5 flex-col">
             <div class="text-white font-bold">{{ player.currentSong.title }}</div>
@@ -21,7 +21,7 @@
                 <BackwardIcon v-else class="h-full w-full text-white" />
             </div>
 
-            <div v-if="!player.songIsLoading" class="btn btn-ghost h-12 w-12 hover:bg-white bg-white rounded-full p-2">
+            <div v-if="!player.songIsLoading" class="btn-ghost h-12 w-12 hover:bg-white bg-white rounded-full p-2">
                 <!-- <PlayIcon class="h-full w-full text-slate-800" /> -->
                 <PlayIcon v-if="!player.isPlaying" class="h-full w-full text-slate-800" @click="player.play(true)" />
                 <PauseIcon v-else class="h-full w-full text-slate-800" @click="player.play(false)" />

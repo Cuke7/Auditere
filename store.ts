@@ -2,7 +2,7 @@ import { ref, reactive } from 'vue'
 import { Playlist, Song } from './types'
 import axios from "axios";
 
-export const testServerURl = "https://4512-78-116-148-205.eu.ngrok.io"
+export const testServerURl = ""
 
 export const player = reactive({
     savedPlaylists: [] as Playlist[],
@@ -19,6 +19,8 @@ export const player = reactive({
     currentTime: 0,
     duration: 300,
     audioSrc: '',
+    search: "",
+    searchResults: [] as Song[],
     searchIsLoading: false,
     async loadSong(song: any) {
         player.isPlaying = false;
