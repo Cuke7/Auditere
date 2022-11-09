@@ -26,7 +26,7 @@ export const player = reactive({
         player.isPlaying = false;
         player.currentSong = song;
         player.songIsLoading = true;
-        let { data } = await axios.get(testServerURl + "/.netlify/functions/getUrl?id=" + song.videoId);
+        let { data } = await axios.get(testServerURl + "https://auditere-backend.onrender.com/?id=" + song.videoId);
         player.audioSrc = data.url;
         player.currentTime = 0
     },
