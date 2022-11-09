@@ -22,12 +22,12 @@ export const player = reactive({
     search: "",
     searchResults: [] as Song[],
     searchIsLoading: false,
-    async loadSong(song: any) {
+    async loadSong(song: Song) {
         player.isPlaying = false;
         player.currentSong = song;
         player.songIsLoading = true;
-        let { data } = await axios.get(testServerURl + "https://auditere-backend.onrender.com/?id=" + song.videoId);
-        player.audioSrc = data.url;
+        // let { data } = await axios.get(testServerURl + "https://auditere-backend.onrender.com/?id=" + song.videoId);
+        player.audioSrc = "https://auditere-backend.onrender.com/?id=" + song.videoId
         player.currentTime = 0
     },
     async loadPlaylist(playlistUrl: string) {
@@ -41,6 +41,9 @@ export const player = reactive({
             player.playlistIsLoading = false;
             return response.data
         }
+    },
+    testPlayer(id: string) {
+        player.audioSrc = "https://auditere-backend.onrender.com/?id=" + id
     },
     nextSong(forward: boolean) {
         if (forward) {
