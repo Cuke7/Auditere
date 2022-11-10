@@ -2,7 +2,7 @@ import { ref, reactive } from 'vue'
 import { Playlist, Song } from './types'
 import axios from "axios";
 
-const testServerURl = ""
+export const testServerURl = ""
 
 export const player = reactive({
     savedPlaylists: [] as Playlist[],
