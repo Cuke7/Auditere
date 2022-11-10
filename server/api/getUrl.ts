@@ -5,9 +5,20 @@ export default defineEventHandler(async (event) => {
     const videoId = query.id + ""
     const info = await ytdl.getInfo(videoId);
     const format = ytdl.chooseFormat(info.formats, { quality: "highestaudio" });
-    console.log("Infos", info)
-    if (format == null) {
-        return null
-    }
-    return format
+    // if (format == null) {
+    //     return null
+    // }
+    // return format
+    let url = "https://www.youtube.com/watch?v=" + videoId;
+
+    let type = "audio/mpeg";
+    let size = format.contentLength;
+    let stream = ytdl(url, {
+        format: format,
+        // requestOptions: {
+        //     headers: DEFAULT_HEADERS,
+        // },
+    });
+
+    return sendStream(event, stream)
 })
