@@ -37,7 +37,7 @@
                 </NuxtLink>
             </div>
         </div>
-        <audio preload="auto" :src="player.audioSrc" @ended="player.nextSong(true)" class="hidden" ref="audio" controls @canplaythrough="player.onCanplaythrough" @timeupdate="player.timeUpdate" @durationchange="player.durationUpdate"></audio>
+        <audio crossorigin="anonymous" preload="auto" :src="player.audioSrc" @ended="player.nextSong(true)" class="hidden" ref="audio" controls @canplaythrough="player.onCanplaythrough" @timeupdate="player.timeUpdate" @durationchange="player.durationUpdate"></audio>
     </div>
 </template>
 
