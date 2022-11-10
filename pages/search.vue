@@ -16,9 +16,8 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import axios from "axios";
 import { Song } from "../types";
-import { player, testServerURl } from "../store";
+import { player } from "../store";
 import Loader from "../components/Loader.vue";
 import SongComponent from "../components/SongComponent.vue";
 
@@ -34,7 +33,7 @@ const suggestions = ref([]);
 const getSearch = async () => {
     player.searchIsLoading = true;
     suggestions.value = [];
-    let { data } = await axios.get(testServerURl + "/.netlify/functions/getSearch?search=" + player.search);
+    let data = await $fetch("/api/getSearch?search=" + player.search);
     player.searchResults = data;
     player.searchIsLoading = false;
 };

@@ -1,9 +1,8 @@
-import { Handler } from "@netlify/functions";
 import axios from "axios";
 
-const handler: Handler = async (event: any, context) => {
-    let search = decodeURI(event.queryStringParameters.search);
-
+export default defineEventHandler(async (event) => {
+    const query = getQuery(event)
+    const search = query.search + ""
     let { data } = await axios("https://www.youtube.com/results?search_query=" + search);
     let start = data.indexOf("var ytInitialData = ");
     let end = data.indexOf("</script>", start);
@@ -67,17 +66,5 @@ const handler: Handler = async (event: any, context) => {
         }
     }
 
-    return {
-        headers: {
-            /* Required for CORS support to work */
-            'Access-Control-Allow-Origin': '*',
-            /* Required for cookies, authorization headers with HTTPS */
-            'Access-Control-Allow-Credentials': true
-        },
-        statusCode: 200,
-        body: JSON.stringify(results.sort(compare)),
-    };
-
-};
-
-export { handler };
+    return results.sort(compare)
+})

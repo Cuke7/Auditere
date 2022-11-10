@@ -1,8 +1,5 @@
-import { ref, reactive } from 'vue'
+import { reactive } from 'vue'
 import { Playlist, Song } from './types'
-import axios from "axios";
-
-export const testServerURl = ""
 
 export const player = reactive({
     savedPlaylists: [] as Playlist[],
@@ -26,28 +23,22 @@ export const player = reactive({
         player.isPlaying = false;
         player.currentSong = song;
         player.songIsLoading = true;
-        // let { data } = await axios.get(testServerURl + "https://auditere-backend.onrender.com/?id=" + song.videoId);
-        // player.audioSrc = "https://auditere-backend.onrender.com?id=" + song.videoId
-        let data = await $fetch('/api/getUrl?id=' + song.videoId)
+        let data = await $fetch("/api/getUrl?id=" + song.videoId)
         console.log(data)
         player.audioSrc = data.url
-        // player.audioSrc = "http://localhost:3001/api?id=" + song.videoId
         player.currentTime = 0
     },
     async loadPlaylist(playlistUrl: string) {
         player.playlistIsLoading = true;
-        let response = await axios.get(testServerURl + "/.netlify/functions/getPlaylist?id=" + playlistUrl);
-        if (response.data == 'Incorrect URL') {
+        let data = await $fetch("/api/getPlaylist?id=" + playlistUrl);
+        if (data == null) {
             player.playlistIsLoading = false;
             console.error("Wrong url")
             return null
         } else {
             player.playlistIsLoading = false;
-            return response.data
+            return data
         }
-    },
-    testPlayer(id: string) {
-        player.audioSrc = "https://auditere-backend.onrender.com/?id=" + id
     },
     nextSong(forward: boolean) {
         if (forward) {
