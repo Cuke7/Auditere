@@ -1,4 +1,5 @@
 import ytdl from "ytdl-core";
+import { sendStream } from 'h3'
 
 export default defineEventHandler(async (event) => {
     const query = getQuery(event)
