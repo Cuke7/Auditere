@@ -9,4 +9,5 @@ export type Song = {
     artwork: string;
     videoId: string;
     artist: string;
+    duration: string;
 }

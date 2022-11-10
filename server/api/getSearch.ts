@@ -32,6 +32,7 @@ export default defineEventHandler(async (event) => {
                             artwork: item.videoRenderer.thumbnail.thumbnails[item.videoRenderer.thumbnail.thumbnails.length - 1].url,
                             videoId: item.videoRenderer.videoId,
                             artist: item.videoRenderer.ownerText.runs[0].text,
+                            duration: item.videoRenderer.lengthText.simpleText,
                         });
                 }
             }
@@ -59,6 +60,7 @@ export default defineEventHandler(async (event) => {
                             artwork: item.videoRenderer.thumbnail.thumbnails[item.videoRenderer.thumbnail.thumbnails.length - 1].url,
                             videoId: item.videoRenderer.videoId,
                             artist: item.videoRenderer.ownerText.runs[0].text,
+                            duration: item.videoRenderer.lengthText.simpleText,
                         });
                     }
                 }

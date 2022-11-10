@@ -33,11 +33,25 @@ const suggestions = ref([]);
 const getSearch = async () => {
     player.searchIsLoading = true;
     suggestions.value = [];
-    let data = await $fetch("/api/getSearch?search=" + player.search);
+    let data: any = await $fetch("/api/getSearch?search=" + player.search);
+    data = data.filter((item: Song) => hmsToSecondsOnly(item.duration) < 600);
+    console.table(data);
     player.searchResults = data;
     player.searchIsLoading = false;
 };
 
+function hmsToSecondsOnly(duration: string) {
+    var p: any[] = duration.split(":"),
+        s = 0,
+        m = 1;
+
+    while (p.length > 0) {
+        s += m * parseInt(p.pop(), 10);
+        m *= 60;
+    }
+
+    return s;
+}
 const songClicked = (song: Song, index: number) => {
     const router = useRouter();
     router.push({ path: "/" });

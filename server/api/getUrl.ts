@@ -1,6 +1,5 @@
 import ytdl from "ytdl-core";
 import { sendStream } from 'h3'
-import fs from 'node:fs'
 
 export default defineEventHandler(async (event) => {
     const query = getQuery(event)
@@ -9,9 +8,12 @@ export default defineEventHandler(async (event) => {
     const format = ytdl.chooseFormat(info.formats, { quality: "lowestaudio" });
     let url = "https://www.youtube.com/watch?v=" + videoId;
     let size = format.contentLength;
+    if (Number(size) > 4700000) {
+        return null
+    }
     const stream = ytdl(url, { format: format })
     setResponseHeader(event, 'Content-Type', "audio/mpeg")
-    // appendResponseHeader(event, "Content-Length", size)
-    // appendResponseHeader(event, "Content-Range", `bytes 0-${size}/${size}`)
+    appendResponseHeader(event, "Content-Length", size)
+    appendResponseHeader(event, "Content-Range", `bytes 0-${size}/${size}`)
     return sendStream(event, stream)
 })
