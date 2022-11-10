@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     },
     pwa: {
         workbox: {
-            enabled: true
+            enabled: false
         },
         manifest: {
             name: 'Auditere',
@@ -31,7 +31,7 @@ export default defineNuxtConfig({
 
 
     },
-    ssr: true,
+    ssr: false,
     app: {
         pageTransition: { name: 'page', mode: 'out-in' },
         head: {
