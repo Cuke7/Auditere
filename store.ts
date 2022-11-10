@@ -16,7 +16,7 @@ export const player = reactive({
     currentTime: 0,
     duration: 300,
     audioSrc: '',
-    search: "Century",
+    search: "",
     searchResults: [] as Song[],
     searchIsLoading: false,
     async loadSong(song: Song) {
@@ -25,8 +25,6 @@ export const player = reactive({
         player.songIsLoading = true;
         // player.audioSrc = "/api/getUrl?id=" + song.videoId
         player.audioSrc = " https://auditere-backend.onrender.com/?id=" + song.videoId
-
-
         player.currentTime = 0
     },
     async loadPlaylist(playlistUrl: string) {
@@ -61,6 +59,17 @@ export const player = reactive({
         console.log("onCanplaythrough")
         player.songIsLoading = false
         player.play(true)
+        if (navigator.mediaSession.metadata) {
+            console.log("HEY")
+            navigator.mediaSession.metadata = new MediaMetadata({
+                title: player.currentSong.title,
+                artist: player.currentSong.artist,
+                album: player.currentPlaylist.name,
+                artwork: [
+                    { src: player.currentSong.artwork, sizes: '312x312', type: 'image/png' },
+                ]
+            });
+        }
     },
     timeUpdate(event: any) {
         player.currentTime = event.target.currentTime;

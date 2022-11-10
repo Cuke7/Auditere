@@ -44,7 +44,34 @@
 <script setup lang="ts">
 import { player } from "../store";
 import { MagnifyingGlassIcon, QueueListIcon, FolderPlusIcon, MusicalNoteIcon, PlayIcon, PauseIcon } from "@heroicons/vue/24/solid";
-import { watch, ref, computed } from "vue";
+import { watch, ref, computed, onMounted } from "vue";
+
+onMounted(() => {
+    if ("mediaSession" in navigator) {
+        // eslint-disable-next-line no-undef
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title: "Never Gonna Give You Up",
+            artist: "",
+            album: "",
+            artwork: [],
+        });
+
+        navigator.mediaSession.setActionHandler("play", () => {
+            player.play(true);
+        });
+        navigator.mediaSession.setActionHandler("pause", () => {
+            player.play(false);
+        });
+        // navigator.mediaSession.setActionHandler("seekbackward", function () {});
+        // navigator.mediaSession.setActionHandler("seekforward", function () {});
+        navigator.mediaSession.setActionHandler("previoustrack", () => {
+            player.nextSong(false);
+        });
+        navigator.mediaSession.setActionHandler("nexttrack", () => {
+            player.nextSong(true);
+        });
+    }
+});
 
 const audio = ref<HTMLAudioElement | null>(null);
 const route = ref(useRoute());
@@ -97,5 +124,9 @@ input {
 #menu,
 #preview {
     animation: border-pulsate 2s infinite;
+}
+
+html {
+    overscroll-behavior: contain;
 }
 </style>
