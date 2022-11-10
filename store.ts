@@ -23,8 +23,10 @@ export const player = reactive({
         player.isPlaying = false;
         player.currentSong = song;
         player.songIsLoading = true;
-        // let data = await $fetch("/api/getUrl?id=" + song.videoId)
-        player.audioSrc = "/api/getUrl?id=" + song.videoId
+        // player.audioSrc = "/api/getUrl?id=" + song.videoId
+        player.audioSrc = " https://auditere-backend.onrender.com/?id=" + song.videoId
+
+
         player.currentTime = 0
     },
     async loadPlaylist(playlistUrl: string) {

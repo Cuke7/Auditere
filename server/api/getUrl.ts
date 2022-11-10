@@ -17,11 +17,12 @@ export default defineEventHandler(async (event) => {
     let size = format.contentLength;
     // ytdl(url, {
     //     format: format,
-    // }).pipe(event.res);
+    // });
 
     const stream = ytdl(url, {
         format: format,
     })
-
+    // event.respondWith(stream)
+    appendResponseHeader(event, 'Content-Type', "audio/mpeg")
     return sendStream(event, stream)
 })
