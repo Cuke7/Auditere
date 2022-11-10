@@ -19,7 +19,7 @@ export const player = reactive({
     currentTime: 0,
     duration: 300,
     audioSrc: '',
-    search: "",
+    search: "Century",
     searchResults: [] as Song[],
     searchIsLoading: false,
     async loadSong(song: Song) {
@@ -27,7 +27,11 @@ export const player = reactive({
         player.currentSong = song;
         player.songIsLoading = true;
         // let { data } = await axios.get(testServerURl + "https://auditere-backend.onrender.com/?id=" + song.videoId);
-        player.audioSrc = "https://auditere-backend.onrender.com/?id=" + song.videoId
+        // player.audioSrc = "https://auditere-backend.onrender.com?id=" + song.videoId
+        let data = await $fetch('/api/hello?id=' + song.videoId)
+        console.log(data)
+        player.audioSrc = data.url
+        // player.audioSrc = "http://localhost:3001/api?id=" + song.videoId
         player.currentTime = 0
     },
     async loadPlaylist(playlistUrl: string) {

@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import axios from "axios";
 import { Song } from "../types";
 import { player, testServerURl } from "../store";
@@ -23,6 +23,10 @@ import Loader from "../components/Loader.vue";
 import SongComponent from "../components/SongComponent.vue";
 
 const input = ref<HTMLInputElement | null>(null);
+
+onMounted(() => {
+    input.value?.focus();
+});
 
 const searchModalElement = ref<HTMLInputElement | null>(null);
 const suggestions = ref([]);

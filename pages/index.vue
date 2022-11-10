@@ -42,7 +42,7 @@ import { onMounted } from "vue";
 import Loader from "../components/Loader.vue";
 import { player } from "../store";
 
-onMounted(() => {
+onMounted(async () => {
     let localData = localStorage.getItem("playlists");
     if (localData) {
         player.savedPlaylists = JSON.parse(localData);
