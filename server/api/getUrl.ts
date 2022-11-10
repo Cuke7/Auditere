@@ -23,8 +23,11 @@ export default defineEventHandler(async (event) => {
         format: format,
     })
     // event.respondWith(stream)
-    // appendResponseHeader(event, 'Content-Type', "audio/mpeg")
-    setResponseHeader(event, 'Content-Type', "audio/mpeg")
+    appendResponseHeader(event, 'Content-Type', "audio/mpeg")
+    appendResponseHeader(event, "Content-Length", size)
+
+
+    // setResponseHeader(event, 'Content-Type', "audio/mpeg")
 
     return sendStream(event, stream)
 })
