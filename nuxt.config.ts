@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     },
     pwa: {
         workbox: {
-            enabled: false
+            enabled: true
         },
         manifest: {
             name: 'Auditere',
