@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
     let size = format.contentLength;
     const stream = ytdl(url, { format: format })
     setResponseHeader(event, 'Content-Type', "audio/mpeg")
-    appendResponseHeader(event, "Content-Length", size)
-    appendResponseHeader(event, "Content-Range", `bytes 0-${size}/${size}`)
+    // appendResponseHeader(event, "Content-Length", size)
+    // appendResponseHeader(event, "Content-Range", `bytes 0-${size}/${size}`)
     return sendStream(event, stream)
 })
