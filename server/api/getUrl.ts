@@ -1,5 +1,6 @@
 import ytdl from "ytdl-core";
 import { sendStream } from 'h3'
+import fs from 'node:fs'
 
 export default defineEventHandler(async (event) => {
     const query = getQuery(event)
@@ -14,12 +15,13 @@ export default defineEventHandler(async (event) => {
 
     let type = "audio/mpeg";
     let size = format.contentLength;
-    let stream = ytdl(url, {
+    // ytdl(url, {
+    //     format: format,
+    // }).pipe(event.res);
+
+    const stream = ytdl(url, {
         format: format,
-        // requestOptions: {
-        //     headers: DEFAULT_HEADERS,
-        // },
-    });
+    })
 
     return sendStream(event, stream)
 })
