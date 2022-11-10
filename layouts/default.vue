@@ -48,7 +48,6 @@ import { watch, ref, computed, onMounted } from "vue";
 
 onMounted(() => {
     if ("mediaSession" in navigator) {
-        // eslint-disable-next-line no-undef
         navigator.mediaSession.metadata = new MediaMetadata({
             title: "Never Gonna Give You Up",
             artist: "",

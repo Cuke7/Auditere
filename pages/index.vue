@@ -67,4 +67,8 @@ function formatTime(seconds: any) {
 .page-leave-to {
     transform: translate(-50px, 0);
 }
+
+html {
+    overscroll-behavior: contain;
+}
 </style>
