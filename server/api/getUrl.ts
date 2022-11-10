@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
     const query = getQuery(event)
     const videoId = query.id + ""
     const info = await ytdl.getInfo(videoId);
-    const format = ytdl.chooseFormat(info.formats, { quality: "highestaudio" });
+    const format = ytdl.chooseFormat(info.formats, { quality: "lowestaudio" });
     let url = "https://www.youtube.com/watch?v=" + videoId;
     let size = format.contentLength;
     const stream = ytdl(url, { format: format })
