@@ -1,42 +1,45 @@
 <template>
     <div class="bg-black h-screen flex flex-col" data-theme="halloween" id="app">
-        <slot />
-        <div class="bg-transparent shadow-2xl shadow-white flex flex-col">
-            <div v-if="page != '/' && player.currentSong.title != 'No song loaded.'" class="w-full flex h-16 border-t-2 border-secondary" id="preview">
-                <img :src="player.currentSong.artwork" class="object-contain" />
-                <div class="flex flex-col h-full truncate mx-4 w-full justify-center">
-                    <div class="truncate">
-                        {{ player.currentSong.title }}
+        <div class="flex flex-grow flex-col overflow-auto sm:flex-row sm:w-1/3 sm:mx-auto">
+            <slot />
+            <div class="bg-transparent flex flex-col">
+                <div v-if="page != '/' && player.currentSong.title != 'No song loaded.'" class="w-full flex h-16 border-t-2 border-secondary sm:hidden" id="preview">
+                    <img :src="player.currentSong.artwork" class="object-contain" />
+                    <div class="flex flex-col h-full truncate mx-4 w-full justify-center">
+                        <div class="truncate text-sm">
+                            {{ player.currentSong.title }}
+                        </div>
+                        <div class="truncate text-gray-400 text-sm">
+                            {{ player.currentSong.artist }}
+                        </div>
                     </div>
-                    <div class="truncate text-gray-400">
-                        {{ player.currentSong.artist }}
+                    <div class="flex items-center mx-4" v-if="!player.songIsLoading">
+                        <PlayIcon v-if="!player.isPlaying" class="h-8 text-white" @click="player.play(true)" />
+                        <PauseIcon v-else class="h-8 text-white" @click="player.play(false)" />
                     </div>
+                    <Loader2 v-else class="h-8 w-8 my-auto mx-4"></Loader2>
                 </div>
-                <div class="flex items-center mx-4" v-if="!player.songIsLoading">
-                    <PlayIcon v-if="!player.isPlaying" class="h-8 text-white" @click="player.play(true)" />
-                    <PauseIcon v-else class="h-8 text-white" @click="player.play(false)" />
+                <div class="flex justify-between items-center border-t-2 border-secondary p-6 sm:flex-col sm:border-t-0 sm:border-l-2 sm:h-full sm:justify-start sm:space-y-8" id="menu">
+                    <NuxtLink to="/">
+                        <MusicalNoteIcon v-if="page == '/'" class="h-6 w-6 mx-4 text-primary" />
+                        <MusicalNoteIcon v-else class="h-6 w-6 mx-4 text-white" />
+                    </NuxtLink>
+                    <NuxtLink to="/queue" v-if="player.currentPlaylist.playlist.length > 0">
+                        <QueueListIcon v-if="page == '/queue'" class="h-6 w-6 mx-4 text-primary" />
+                        <QueueListIcon v-else class="h-6 w-6 mx-4 text-white" />
+                    </NuxtLink>
+                    <NuxtLink to="/playlist">
+                        <FolderPlusIcon v-if="page == '/playlist'" class="h-6 w-6 mx-4 text-primary" />
+                        <FolderPlusIcon v-else class="h-6 w-6 mx-4 text-white" />
+                    </NuxtLink>
+                    <NuxtLink to="/search">
+                        <MagnifyingGlassIcon v-if="page == '/search'" class="h-6 w-6 mx-4 text-primary" />
+                        <MagnifyingGlassIcon v-else class="h-6 w-6 mx-4 text-white" />
+                    </NuxtLink>
                 </div>
-                <Loader2 v-else class="h-8 w-8 my-auto mx-4"></Loader2>
-            </div>
-            <div class="flex justify-between items-center border-t-2 border-secondary p-6" id="menu">
-                <NuxtLink to="/">
-                    <MusicalNoteIcon v-if="page == '/'" class="h-6 w-6 mx-4 text-primary" />
-                    <MusicalNoteIcon v-else class="h-6 w-6 mx-4 text-white" />
-                </NuxtLink>
-                <NuxtLink to="/queue" v-if="player.currentPlaylist.playlist.length > 0">
-                    <QueueListIcon v-if="page == '/queue'" class="h-6 w-6 mx-4 text-primary" />
-                    <QueueListIcon v-else class="h-6 w-6 mx-4 text-white" />
-                </NuxtLink>
-                <NuxtLink to="/playlist">
-                    <FolderPlusIcon v-if="page == '/playlist'" class="h-6 w-6 mx-4 text-primary" />
-                    <FolderPlusIcon v-else class="h-6 w-6 mx-4 text-white" />
-                </NuxtLink>
-                <NuxtLink to="/search">
-                    <MagnifyingGlassIcon v-if="page == '/search'" class="h-6 w-6 mx-4 text-primary" />
-                    <MagnifyingGlassIcon v-else class="h-6 w-6 mx-4 text-white" />
-                </NuxtLink>
             </div>
         </div>
+
         <audio autoplay preload="auto" :src="player.audioSrc" @ended="player.nextSong(true)" class="hidden" ref="audio" controls @canplaythrough="player.onCanplaythrough" @timeupdate="player.timeUpdate" @durationchange="player.durationUpdate"></audio>
     </div>
 </template>

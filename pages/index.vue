@@ -1,7 +1,7 @@
 <template>
-    <div class="flex flex-col items-center justify-around flex-1 py-8">
-        <div class="flex justify-center">
-            <img :src="player.currentSong.artwork" class="object-contain w-4/5 rounded-xl" />
+    <div class="flex flex-col items-center justify-around flex-grow py-8">
+        <div class="flex justify-center w-full px-8 max-w-[600px]">
+            <img :src="player.currentSong.artwork" class="rounded-xl" />
         </div>
         <div class="flex w-4/5 flex-col">
             <div class="text-white font-bold">{{ player.currentSong.title }}</div>

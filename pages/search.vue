@@ -1,12 +1,12 @@
 <template>
-    <div class="flex flex-col flex-1 overflow-auto">
+    <div class="flex flex-col flex-grow overflow-auto">
         <div class="flex flex-col">
             <div class="flex-col flex m-8 items-center">
                 <input @keyup.enter="getSearch" ref="input" v-model="player.search" placeholder="Search on youtube" type="text" class="w-full font-mono bg-red-800 rounded-full p-3 text-white placeholder:text-white" />
             </div>
             <Loader v-if="player.searchIsLoading" class="mx-auto"></Loader>
         </div>
-        <div class="flex flex-col px-8 overflow-scroll">
+        <div class="flex flex-col px-8">
             <div @click="songClicked(song, index)" v-for="(song, index) in player.searchResults" :key="index" class="flex my-4">
                 <song-component :song="song" />
             </div>

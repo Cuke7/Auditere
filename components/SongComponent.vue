@@ -1,6 +1,6 @@
 <template>
-    <img class="w-24 rounded" :src="song.artwork" alt="" />
-    <div class="ml-4">
+    <img class="w-24 rounded cursor-pointer" :src="song.artwork" alt="" />
+    <div class="ml-4 cursor-pointer">
         <div class="text-sm">
             {{ song.title }}
         </div>
@@ -18,5 +18,4 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-
 </script>

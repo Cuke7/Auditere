@@ -1,7 +1,7 @@
 <template>
-    <div class="flex flex-col flex-1 overflow-auto">
+    <div class="flex flex-col flex-grow overflow-auto">
         <div class="text-lg font-bold mx-auto m-8">{{ player.currentPlaylist.name }}</div>
-        <div class="overflow-scroll px-8">
+        <div class="px-8">
             <div @click="songClicked(song, index)" v-for="(song, index) in player.currentPlaylist.playlist" :key="index" class="flex my-4">
                 <song-component :song="song" />
             </div>
@@ -18,8 +18,8 @@ import SongComponent from "../components/SongComponent.vue";
 const queueModal = ref<HTMLInputElement | null>(null);
 
 const songClicked = (song: Song, index: number) => {
-    // const router = useRouter();
-    // router.push({ path: "/" });
+    const router = useRouter();
+    router.push({ path: "/" });
     player.songIndex = index;
     if (queueModal.value) queueModal.value.checked = false;
     player.loadSong(song);

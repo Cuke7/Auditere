@@ -19,7 +19,6 @@
 import { player } from "../store";
 import { ref } from "vue";
 import { Playlist } from "../types";
-import Loader from "../components/Loader.vue";
 import { PlayIcon, PlusIcon, TrashIcon } from "@heroicons/vue/24/solid";
 
 const playlistModalElement = ref<HTMLInputElement | null>(null);

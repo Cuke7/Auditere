@@ -7,7 +7,8 @@ export const player = reactive({
     currentSong: {
         title: "No song loaded.",
         artist: "",
-        artwork: "/bird.png",
+        // artwork: "/bird.png",
+        artwork: "https://i.ytimg.com/vi/YVkUvmDQ3HY/hq720.jpg?sqp=-oaymwEXCNAFEJQDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAjIyuSPXEpsU_1Hj8B7L9sWnJhTw"
     },
     playlistIsLoading: false,
     songIndex: 0,
@@ -27,7 +28,7 @@ export const player = reactive({
         // player.audioSrc = " https://auditere-backend.onrender.com/?id=" + song.videoId
         player.currentTime = 0
     },
-    async loadPlaylist(playlistUrl: string) {
+    async loadPlaylist(playlistUrl: string): Promise<Playlist | null> {
         player.playlistIsLoading = true;
         let data = await $fetch("/api/getPlaylist?id=" + playlistUrl);
         if (data == null) {
