@@ -2,7 +2,7 @@
     <div class="bg-black h-screen flex flex-col" data-theme="halloween" id="app">
         <div class="flex flex-grow flex-col overflow-auto sm:flex-row sm:w-1/3 sm:mx-auto">
             <slot />
-            <div class="bg-transparent flex flex-col">
+            <div class="bg-transparent flex flex-col sm:order-first">
                 <div v-if="page != '/' && player.currentSong.title != 'No song loaded.'" class="w-full flex h-16 border-t-2 border-secondary sm:hidden" id="preview">
                     <img :src="player.currentSong.artwork" class="object-contain" />
                     <div class="flex flex-col h-full truncate mx-4 w-full justify-center">
@@ -19,7 +19,7 @@
                     </div>
                     <Loader2 v-else class="h-8 w-8 my-auto mx-4"></Loader2>
                 </div>
-                <div class="flex justify-between items-center border-t-2 border-secondary p-6 sm:flex-col sm:border-t-0 sm:border-l-2 sm:h-full sm:justify-start sm:space-y-8" id="menu">
+                <div class="flex justify-between items-center border-t-2 border-secondary p-6 sm:flex-col sm:border-t-0 sm:border-r-2 sm:h-full sm:justify-start sm:space-y-8" id="menu">
                     <NuxtLink to="/">
                         <MusicalNoteIcon v-if="page == '/'" class="h-6 w-6 mx-4 text-primary" />
                         <MusicalNoteIcon v-else class="h-6 w-6 mx-4 text-white" />
