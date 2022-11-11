@@ -7,8 +7,7 @@ export const player = reactive({
     currentSong: {
         title: "No song loaded.",
         artist: "",
-        // artwork: "/bird.png",
-        artwork: "https://i.ytimg.com/vi/YVkUvmDQ3HY/hq720.jpg?sqp=-oaymwEXCNAFEJQDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAjIyuSPXEpsU_1Hj8B7L9sWnJhTw"
+        artwork: "/bird.png",
     },
     playlistIsLoading: false,
     songIndex: 0,
