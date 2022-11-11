@@ -39,7 +39,7 @@ export default defineEventHandler(async (event) => {
         }
     }
 
-    function compare(a, b) {
+    function compare(a: any, b: any) {
         if (a.official && !b.official) {
             return -1;
         }
