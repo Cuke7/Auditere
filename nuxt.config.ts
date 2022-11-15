@@ -6,14 +6,14 @@ export default defineNuxtConfig({
     },
     pwa: {
         workbox: {
-            enabled: false
+            enabled: true
         },
         manifest: {
             name: 'Auditere',
             short_name: 'Auditere',
             background_color: "#000000",
             theme_color: "#000000",
-            display: "fullscreen",
+            display: "standalone",
             icons: [
                 {
                     src: 'bird.png',
