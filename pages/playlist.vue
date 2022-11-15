@@ -6,10 +6,14 @@
             <button v-else class="ml-4 btn btn-ghost loading p-0"></button>
         </div>
         <div class="mx-8">
-            <div v-for="(playlist, index) in player.savedPlaylists" :key="index" class="flex justify-between items-center rounded-lg px-4 mb-8">
-                <div class="font-bold txt-lg">{{ playlist.name }}</div>
-                <TrashIcon class="w-6 h-6" @click="player.removePlaylist(playlist)" />
-                <PlayIcon class="w-8 h-8" @click="playlistClicked(playlist)" />
+            <div v-for="(playlist, index) in player.savedPlaylists" :key="index" class="rounded-l-lg rounded-r-xl p-[2px] mb-8 bg-gradient-to-r from-primary to-secondary">
+                <div class="flex justify-between items-center bg-slate-800 rounded-l-lg rounded-r-3xl p-4">
+                    <div class="font-bold txt-lg">{{ playlist.name }}</div>
+                    <div class="flex items-center">
+                        <TrashIcon class="w-6 h-6 mr-16 text-white cursor-pointer" @click="player.removePlaylist(playlist)" />
+                        <PlayIcon class="w-8 h-8 text-white cursor-pointer" @click="playlistClicked(playlist)" />
+                    </div>
+                </div>
             </div>
         </div>
     </div>
