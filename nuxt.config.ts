@@ -29,7 +29,7 @@ export default defineNuxtConfig({
                 }
             ],
             share_target: {
-                action: "share.html",
+                action: "index.html",
                 method: "GET",
                 params: {
                     title: "title",
