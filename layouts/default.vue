@@ -19,7 +19,7 @@
                     </div>
                     <Loader2 v-else class="h-8 w-8 my-auto mx-4"></Loader2>
                 </div>
-                <div class="flex justify-between items-center border-t-2 border-secondary p-6 sm:flex-col sm:border-t-0 sm:border-r-2 sm:h-full sm:justify-start sm:space-y-8" id="menu">
+                <div class="flex justify-between items-center border-t-2 border-primary p-6 sm:flex-col sm:border-t-0 sm:border-r-2 sm:h-full sm:justify-start sm:space-y-8" id="menu">
                     <NuxtLink to="/">
                         <MusicalNoteIcon v-if="page == '/'" class="h-6 w-6 mx-4 text-primary" />
                         <MusicalNoteIcon v-else class="h-6 w-6 mx-4 text-white" />
@@ -123,10 +123,10 @@ input {
     }
 }
 
-#menu,
+/*#menu,
 #preview {
     animation: border-pulsate 2s infinite;
-}
+}*/
 
 html {
     overscroll-behavior: contain;
